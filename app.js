@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require('cors');
+const bodyParser = require("body-parser");
 const morgan = require('morgan');
+
 const index = require('./routes/index');
-const hello = require('./routes/hello');
 const app = express();
 
 const port = process.env.PORT || 1337;
@@ -13,6 +14,8 @@ if (process.env.NODE_ENV !== 'test') {
     app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
 }
 
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cors());
 
 // don't show the log when it is test
@@ -29,7 +32,6 @@ app.use((req, res, next) => {
 
 
 app.use('/', index);
-//app.use('/hello', hello);
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler
 // Put this last

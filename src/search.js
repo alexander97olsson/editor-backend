@@ -2,9 +2,9 @@
  * Connect to the database and search using a criteria.
  */
 "use strict";
-
+const config = require("../config.json");
 const mongo = require("mongodb").MongoClient;
-const dsn =  process.env.DBWEBB_DSN || "mongodb+srv://alextexteditor:notan123@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const dsn =  process.env.DBWEBB_DSN || `mongodb+srv://${config.username}:${config.password}@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 // Find documents for this living in...
 const criteria1 = {
