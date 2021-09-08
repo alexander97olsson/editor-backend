@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const morgan = require('morgan');
 
 const index = require('./routes/index');
+const data = require('./routes/data');
+//const post = require('./routes/addDocuments');
 const app = express();
 
 const port = process.env.PORT || 1337;
@@ -32,6 +34,10 @@ app.use((req, res, next) => {
 
 
 app.use('/', index);
+app.use('/data', data);
+//app.use('/post', post);
+
+
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler
 // Put this last
