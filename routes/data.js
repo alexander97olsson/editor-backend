@@ -32,8 +32,6 @@ router.post('/', async function(req, res, next) {
 });
 
 router.put('/', async function(req, res, next) {
-
-
     const filter = { _id: ObjectId(req.body.__id) };
     const doc = {
         title: req.body.title,

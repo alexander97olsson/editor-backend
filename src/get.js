@@ -4,16 +4,23 @@ const { text } = require("express");
 
 const data = {
  getAll: async function run() {
+   let db;
    try {
-     const db = await database.getDb();
+     db = await database.getDb();
      const allData = await db.collection.find().toArray();
-     // print a message if no documents were found
-
      return {
         allData: allData
      }
-   } finally {
-     const db = await database.getDb();
+   } catch (e) {
+    return res.status(500).json({
+        errors: {
+            status: 500,
+            path: "/data",
+            title: "Database error",
+            message: e.message
+        }
+    }); 
+  } finally {
      await db.client.close();
    }
  }

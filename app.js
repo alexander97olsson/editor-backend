@@ -5,7 +5,6 @@ const morgan = require('morgan');
 
 const index = require('./routes/index');
 const data = require('./routes/data');
-//const post = require('./routes/addDocuments');
 const app = express();
 
 const port = process.env.PORT || 1337;
@@ -20,23 +19,15 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cors());
 
-// don't show the log when it is test
-if (process.env.NODE_ENV !== 'test') {
-    // use morgan to log at command line
-    app.use(morgan('combined')); // 'combined' outputs the Apache style LOGs
-}
-
 app.use((req, res, next) => {
     console.log(req.method);
     console.log(req.path);
     next();
 });
 
-
+//routes
 app.use('/', index);
 app.use('/data', data);
-//app.use('/post', post);
-
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler

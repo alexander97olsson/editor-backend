@@ -4,16 +4,23 @@ const { text } = require("express");
 
 const data = {
  updateDoc: async function update(filter, doc) {
+    let db;
     try {
-        const db = await database.getDb();
+        db = await database.getDb();
         await db.collection.updateOne(filter, {$set: doc});
-        // print a message if no documents were found
-        
+      } catch (e) {
+        return res.status(500).json({
+            errors: {
+                status: 500,
+                path: "/data",
+                title: "Database error",
+                message: e.message
+            }
+        }); 
       } finally {
-        const db = await database.getDb();
-        await db.client.close();
+         await db.client.close();
       }
- }
+    }
 }
 
 module.exports = data;
