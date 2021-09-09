@@ -19,6 +19,12 @@ Alla data hittas genom /data
 * https://ramverk-editor-alos17.azurewebsites.net/data
 
 ```
+    https://ramverk-editor-alos17.azurewebsites.net/data
+```
+
+
+
+```
  .
 ..:  Copyright (c) 2021 Alexander Olsson, alexander93olsson@hotmail.com
 ```
