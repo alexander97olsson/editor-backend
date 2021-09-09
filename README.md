@@ -1,14 +1,17 @@
-<img src="yatzyyPic.png" alt="yatzy" width="270" height="180">
-
 # Jsramverk
 
 Installation/documentation av mitt API.
+Detta är en backend support för min editor.
 
 GitHub för detta repo är publicerat på:
 
 * https://github.com/alexander97olsson/editor-backend
 
-För att spela kan man antingen ladda ner spelet eller spela online på studentservern:
+Guide/struktur av routes:
+Det finns möjlighet att hämta/addera/hämta.
+Alternativ som finns är id (_id), title (title), text (maintext). Id skapas automatiskt och behöver inte ta hänsyn till. När man 
+uppdaterar något behöver man dock specificera med hjälp av id (_id).
+
 
 Testa min editor på:
 
@@ -23,8 +26,6 @@ Alla data hittas genom /data
 ```
 
 
-
 ```
- .
-..:  Copyright (c) 2021 Alexander Olsson, alexander93olsson@hotmail.com
+    Copyright (c) 2021 Alexander Olsson, alexander93olsson@hotmail.com
 ```
