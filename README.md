@@ -14,7 +14,7 @@ uppdaterar något behöver man dock specificera med hjälp av id (_id).
 
 * Ladda ner MongoDB för Windows på länken
 
-    Gå till MongoDB Community Server och välj ditt operativsystem i listan. Följ sedan installationsinstruktionerna.
+    Gå till <a href="https://www.mongodb.com/try/download/community">MongoDB Community Server</a> och välj ditt operativsystem i listan. Följ sedan installationsinstruktionerna.
 
 * Skapa egen databas
 
