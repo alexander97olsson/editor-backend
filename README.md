@@ -12,6 +12,46 @@ Det finns möjlighet att hämta/addera/hämta.
 Alternativ som finns är id (_id), title (title), text (maintext). Id skapas automatiskt och behöver inte ta hänsyn till. När man 
 uppdaterar något behöver man dock specificera med hjälp av id (_id).
 
+* Ladda ner MongoDB för Windows på länken
+
+    Gå till MongoDB Community Server och välj ditt operativsystem i listan. Följ sedan installationsinstruktionerna.
+
+* Skapa egen databas
+
+```
+    $ mongosh
+    $ use databasensnamn
+    $ db.crowd.insertOne( { title: "NewTitle", mainText: "<p>Hello world</p>" } )
+```
+Node till MongoDB
+
+```
+    npm install
+    npm install mongodb --save
+```
+Sist kör dessa två för att skapa databasen med src/setup.js. Det skapar ett exempel objekt till min editor
+
+```
+    $ node src/setup.js
+    $ mongo --eval "db.crowd.find().pretty()"
+```
+
+* För att koppla upp sig mot sin egna databas på monogdb behöver man skapa sig en config.jon fil. Config.password
+och config.username kommer bytas ut mot värderna i config,json filen.
+
+Strukturen för config.json ska se ut så här:
+
+```
+    {
+    "username": "exampleName"
+    "password": "******"
+    }
+```
+
+```
+let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+```
+
 
 Testa min editor på:
 
