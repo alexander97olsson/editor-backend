@@ -52,6 +52,11 @@ Strukturen för config.json ska se ut så här:
 let dsn = `mongodb+srv://${config.username}:${config.password}@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 ```
 
+* Starta programmet genom
+
+```
+    npm start
+```
 
 Testa min editor på:
 
