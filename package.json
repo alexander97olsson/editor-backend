@@ -5,12 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
-    "posttest": "npm run eslint",
     "start": "nodemon app.js",
-    "production": "NODE_ENV='production' node app.js",
-    "report-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "report-codecov": "nyc report --reporter=lcov > coverage.lcov && codecov",
-    "eslint": "eslint ."
+    "production": "NODE_ENV='production' node app.js"
   },
   "author": "",
   "license": "ISC",
