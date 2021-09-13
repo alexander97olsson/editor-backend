@@ -119,6 +119,5 @@ dist
 
 node_modules/
 .vscode/
-db/
 
 config.json
