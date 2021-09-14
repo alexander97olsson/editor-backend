@@ -33,9 +33,14 @@ const data = {
     let db;
     try {
         db = await database.getDb();
-        await db.collection.insertOne(doc);
+        const result = await db.collection.insertOne(doc);
+        if (result) {
+          return res.json({
+              data: result
+          });
+      }
       } catch (e) {
-        return res.body.status(500).json({
+        return res.status(500).json({
             errors: {
                 status: 500,
                 path: "/data",
