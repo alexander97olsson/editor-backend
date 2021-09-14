@@ -30,6 +30,7 @@ const database = {
         const collection = await db.collection(collectionName);
 
         return {
+            db: db,
             collection: collection,
             client: client,
         };

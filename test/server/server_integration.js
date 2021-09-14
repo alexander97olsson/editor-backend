@@ -7,11 +7,35 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
 
+const database = require("../../db/database.js");
+const collectionName = "crowd";
 chai.should();
 
 chai.use(chaiHttp);
 
 describe('app', () => {
+    before(() => {
+        return new Promise(async (resolve) => {
+            const db = await database.getDb();
+
+            db.db.listCollections(
+                { name: collectionName }
+            )
+                .next()
+                .then(async function(info) {
+                    if (info) {
+                        await db.collection.drop();
+                    }
+                })
+                .catch(function(err) {
+                    console.error(err);
+                })
+                .finally(async function() {
+                    await db.client.close();
+                    resolve();
+                });
+        });
+    });
     describe('GET /data', () => {
         it('should add an document', (done) => {
             let doc = {
