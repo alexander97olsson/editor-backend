@@ -23,6 +23,8 @@ describe('app', () => {
                     done();
                 });
         });
+    });
+
     describe('GET /index', () => {
         it('index', (done) => {
             chai.request(server)
