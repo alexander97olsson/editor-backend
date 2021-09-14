@@ -46,7 +46,8 @@ describe('app', () => {
                 .post("/data")
                 .send(doc)
                 .end((err, res) => {
-
+                    res.body.should.have.status(201);
+                    console.log(res.body.errors);
                     done();
                 });
         });
@@ -56,7 +57,8 @@ describe('app', () => {
                 .get("/data")
                 .end((err, res) => {
                     res.body.should.be.an("object");
-                    console.log(res.body);
+                    res.body.data.msg.should.be.an("array");
+                    res.body.data.msg.length.should.be.above(0);
                     done();
                 });
         });
