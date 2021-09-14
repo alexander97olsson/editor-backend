@@ -6,7 +6,7 @@ const getAllUpdate = require("../src/update.js");
 const ObjectId = require('mongodb').ObjectId;
 
 
-router.get('/', async function(req, res, next) {
+/* router.get('/', async function(req, res, next) {
     let result = await getAll.getAll();
 
     const data = {
@@ -17,7 +17,11 @@ router.get('/', async function(req, res, next) {
 
     console.log(data);
     res.json(data);
-});
+}); */
+
+router.get('/',
+    (req, res) => getAll.getAllDataForUser(res, req)
+);
 
 router.post('/', async function(req, res, next) {
     const doc = {
