@@ -35,12 +35,12 @@ const data = {
         db = await database.getDb();
         const result = await db.collection.insertOne(doc);
         if (result) {
-          return res.status(201).json({
+          return res.body.status(201).json({
               data: result
           });
       }
       } catch (e) {
-        return res.status(500).json({
+        return res.body.status(500).json({
             errors: {
                 status: 500,
                 path: "/data",
