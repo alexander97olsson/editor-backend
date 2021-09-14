@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/alexander97olsson/editor-backend.svg?branch=master)](https://app.travis-ci.com/alexander97olsson/editor-backend)
+
 # Jsramverk
 
 Installation/documentation av mitt API.
