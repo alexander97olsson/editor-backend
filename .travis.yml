@@ -6,5 +6,8 @@ node_js:
     - "11"
 services: mongodb
 
+before_script:
+    - npm install
+
 script:
-    - run test
+    - npm test
