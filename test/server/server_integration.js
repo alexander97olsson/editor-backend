@@ -46,7 +46,7 @@ describe('app', () => {
                 .post("/data")
                 .send(doc)
                 .end((err, res) => {
-                    res.should.have.status(201);
+                    res.body.should.have.status(201);
                     console.log(res.body.errors);
                     done();
                 });
