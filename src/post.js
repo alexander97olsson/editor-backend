@@ -39,9 +39,6 @@ const data = {
               data: result
           });
         }
-        else {
-          return console.log("hejsan");
-      }
       } catch (e) {
         return res.status(500).json({
             errors: {
