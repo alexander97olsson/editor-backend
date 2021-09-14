@@ -23,7 +23,11 @@ router.get('/',
     (req, res) => getAll.getAllDataForUser(res, req)
 );
 
-router.post('/', async function(req, res, next) {
+router.post('/',
+    (req, res) => getAllPost.createData(res, req)
+);
+
+/* router.post('/', async function(req, res, next) {
     const doc = {
         title: req.body.title,
         maintext: req.body.maintext
@@ -36,7 +40,7 @@ router.post('/', async function(req, res, next) {
 
     console.log(data);
     res.json(data);
-});
+}); */
 
 router.put('/', async function(req, res, next) {
     const filter = { _id: ObjectId(req.body.__id) };
