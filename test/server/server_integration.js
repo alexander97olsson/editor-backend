@@ -47,7 +47,7 @@ describe('app', () => {
                 .send(doc)
                 .end((err, res) => {
                     res.should.have.status(201);
-                    console.log(res.body);
+                    console.log(res.body.errors);
                     done();
                 });
         });
