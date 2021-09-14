@@ -16,13 +16,13 @@ describe('app', () => {
         it('should add an document', (done) => {
             let doc = {
                 title: "testing title",
-                maintext: "<p>Testar en string från test</p>"
+                maintext: "<p>Testar en string från testasdasd</p>"
             };
             chai.request(server)
                 .post("/data")
                 .send(doc)
                 .end((err, res) => {
-                    res.should.have.status(200);
+                    res.should.have.status(201);
                     done();
                 });
         });
