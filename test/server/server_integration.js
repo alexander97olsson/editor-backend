@@ -14,7 +14,7 @@ chai.should();
 chai.use(chaiHttp);
 
 describe('app', () => {
-    before(() => {
+    /*before(() => {
         return new Promise(async (resolve) => {
             const db = await database.getDb();
 
@@ -35,7 +35,7 @@ describe('app', () => {
                     resolve();
                 });
         });
-    });
+    });*/
     describe('GET /data', () => {
         it('should add an document', (done) => {
             let doc = {
