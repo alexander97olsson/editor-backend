@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 
 describe('app', () => {
     describe('GET /data', () => {
-        it('should add an document', (done) => {
+        it('should add an document', async function() {
             let doc = {
                 title: "testing title",
                 maintext: "<p>Testar en string från test</p>"
@@ -23,29 +23,16 @@ describe('app', () => {
                 .send(doc)
                 .end((err, res) => {
                     res.should.have.status(200);
-                    done();
                 });
         });
 
-        it('Should give me some data', (done) => {
+        it('Should give me some data', async function() {
             chai.request(server)
                 .get("/data")
                 .end((err, res) => {
                     res.body.should.be.an("object");
                     res.body.data.msg.should.be.an("array");
                     res.body.data.msg.length.should.be.above(0);
-                    done();
-                });
-        });
-    });
-
-    describe('GET /index', () => {
-        it('index', (done) => {
-            chai.request(server)
-                .get("/")
-                .end((err, res) => {
-                    res.body.should.be.an("object");
-                    done();
                 });
         });
     });
