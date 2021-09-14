@@ -33,12 +33,7 @@ const data = {
     let db;
     try {
         db = await database.getDb();
-        const result = await db.collection.insertOne(doc);
-        if (result) {
-          return res.body.status(201).json({
-              data: result
-          });
-      }
+        await db.collection.insertOne(doc);
       } catch (e) {
         return res.body.status(500).json({
             errors: {
