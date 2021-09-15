@@ -4,7 +4,8 @@
 "use strict";
 const config = require("../config.json");
 const mongo = require("mongodb").MongoClient;
-const dsn =  process.env.DBWEBB_DSN || `mongodb+srv://${config.username}:${config.password}@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const dsn =  process.env.DBWEBB_DSN || `mongodb+srv://${config.username}:${config.password}` +
+`@cluster0.xs9r9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const fs = require("fs");
 const path = require("path");
