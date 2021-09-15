@@ -46,6 +46,7 @@ describe('app', () => {
                 .post("/data")
                 .send(doc)
                 .end((err, res) => {
+                    res.should.have.status(202);
                     done();
                 });
         });
@@ -54,11 +55,32 @@ describe('app', () => {
             chai.request(server)
                 .get("/data")
                 .end((err, res) => {
+                    res.should.have.status(201);
                     res.body.should.be.an("object");
                     res.body.data.msg.should.be.an("array");
                     res.body.data.msg.length.should.be.above(0);
                     done();
                 });
+        });
+
+        it('Should update some data', (done) => {
+            chai.request(server)
+            .get("/data")
+            .end((err, res) => {
+                console.log(res.body.data.msg[0]._id);
+                let doc = {
+                    __id: res.body.data.msg[0]._id,
+                    title: "newTitle",
+                    maintext: "<p>Testar en string från testasdasd</p>"
+                };
+                chai.request(server)
+                    .put("/data")
+                    .send(doc)
+                    .end((err, res) => {
+                        res.should.have.status(204);
+                        done();
+                    });
+            });
         });
     });
 });
