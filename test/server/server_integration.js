@@ -3,6 +3,7 @@
 
 process.env.NODE_ENV = 'test';
 
+const { assert } = require('chai');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
@@ -59,6 +60,7 @@ describe('app', () => {
                     res.body.should.be.an("object");
                     res.body.data.msg.should.be.an("array");
                     res.body.data.msg.length.should.be.above(0);
+                    assert.equal(res.body.data.msg[0].title, "testing title");
                     done();
                 });
         });
@@ -81,6 +83,18 @@ describe('app', () => {
                         done();
                     });
             });
+        });
+    });
+    describe('GET /index', () => {
+        it('testing index', (done) => {
+            chai.request(server)
+                .get("/")
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    console.log(res.body.data.msg);
+                    assert.equal(res.body.data.msg, "Testing index site");
+                    done();
+                });
         });
     });
 });

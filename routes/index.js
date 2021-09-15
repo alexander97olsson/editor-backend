@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
         }
     };
 
-    res.json(data);
+    res.status(201).json(data);
 });
 
 module.exports = router;
