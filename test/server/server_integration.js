@@ -8,8 +8,8 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
 
-const database = require("../../db/database.js");
-const collectionName = "crowd";
+//const database = require("../../db/database.js");
+//const collectionName = "crowd";
 
 chai.should();
 
