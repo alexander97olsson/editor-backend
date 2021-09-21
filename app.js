@@ -12,18 +12,20 @@ const port = process.env.PORT || 1337;
 const httpServer = require("http").createServer(app);
 
 const io = require("socket.io")(httpServer, {
-  cors: {
-    //origin: "http://localhost:4200",
-    origin: "https://www.student.bth.se",
-    methods: ["GET", "POST"]
-  }
+    cors: {
+        //origin: "http://localhost:4200",
+        origin: "https://www.student.bth.se",
+        methods: ["GET", "POST"]
+    }
 });
 
 let documents = {};
+
 // Server
 io.sockets.on('connection', function(socket) {
     console.log(socket.id);
     let previousId;
+
     socket.on('joinRoom', function(room) {
         socket.leave(previousId);
         socket.join(room);
@@ -32,7 +34,6 @@ io.sockets.on('connection', function(socket) {
             io.to(room).emit("getDoc", documents[room]);
         }
         previousId = room;
-        
     });
     socket.on("doc", (data) => {
         io.to(data["_id"]).emit("doc", data);
@@ -66,14 +67,11 @@ app.use('/data', data);
 // Put this last
 app.use((req, res, next) => {
     var err = new Error("Not Found");
-    
+
     err.status = 404;
     next(err);
 });
 
-//httpServer.listen(serverPort, () => {
-  //  console.log('Listening on port 1338');
-//});
 // Start up server
 //app.listen(port, () => console.log(`Example API listening on port ${port}!`));
 const server = httpServer.listen(port, () => console.log(`Example app listening on port ${port}!`));
