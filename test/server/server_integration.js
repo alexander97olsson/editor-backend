@@ -8,6 +8,9 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
 
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW` +
+`FpbCI6ImFsZXhAaG90bWFpbC5zZSIsImlhdCI6MTYzMjk4NzQ1MiwiZXhwIjo` +
+`xNjMzMDczODUyfQ.4jdb7XN9-5vJNxZu1kAJ2TVTVc5YnYyKqHSMaYMErvE`;
 //const database = require("../../db/database.js");
 //const collectionName = "crowd";
 
@@ -47,6 +50,7 @@ describe('app', () => {
 
             chai.request(server)
                 .post("/data")
+                .set({"x-access-token": token})
                 .send(doc)
                 .end((err, res) => {
                     res.should.have.status(202);
@@ -57,6 +61,7 @@ describe('app', () => {
         it('Should give me some data', (done) => {
             chai.request(server)
                 .get("/data")
+                .set({"x-access-token": token})
                 .end((err, res) => {
                     res.should.have.status(201);
                     res.body.should.be.an("object");
@@ -70,6 +75,7 @@ describe('app', () => {
         it('Should update some data', (done) => {
             chai.request(server)
                 .get("/data")
+                .set({"x-access-token": token})
                 .end((err, res) => {
                     console.log(res.body.data.msg[0]._id);
                     let doc = {
@@ -80,6 +86,7 @@ describe('app', () => {
 
                     chai.request(server)
                         .put("/data")
+                        .set({"x-access-token": token})
                         .send(doc)
                         .end((err, res) => {
                             res.should.have.status(204);

@@ -5,6 +5,7 @@
 //const config = require("../config.json");
 const mongo = require("mongodb").MongoClient;
 const collectionName = "crowd";
+const collectionNameUsers = "users";
 
 let config;
 
@@ -29,10 +30,12 @@ const database = {
         });
         const db = await client.db();
         const collection = await db.collection(collectionName);
+        const collectionUsers = await db.collection(collectionNameUsers);
 
         return {
             db: db,
             collection: collection,
+            collectionUsers: collectionUsers,
             client: client,
         };
     }

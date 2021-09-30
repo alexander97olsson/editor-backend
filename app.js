@@ -5,6 +5,7 @@ const morgan = require('morgan');
 
 const index = require('./routes/index');
 const data = require('./routes/data');
+const auth = require("./routes/auth");
 const app = express();
 
 const port = process.env.PORT || 1337;
@@ -13,8 +14,7 @@ const httpServer = require("http").createServer(app);
 
 const io = require("socket.io")(httpServer, {
     cors: {
-        //origin: "http://localhost:4200",
-        origin: "https://www.student.bth.se",
+        origin: [ "http://localhost:4200", "https://www.student.bth.se"],
         methods: ["GET", "POST"]
     }
 });
@@ -61,6 +61,7 @@ app.use((req, res, next) => {
 //routes
 app.use('/', index);
 app.use('/data', data);
+app.use("/auth", auth);
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler

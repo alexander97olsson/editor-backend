@@ -5,7 +5,9 @@ const data = {
     createData: async function inserting(res, req) {
         const doc = {
             title: req.body.title,
-            maintext: req.body.maintext
+            maintext: req.body.maintext,
+            owner: req.body.owner,
+            allowed_users: []
         };
 
         let db;
