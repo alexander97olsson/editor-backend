@@ -5,9 +5,6 @@ node_js:
     - "12"
     - "11"
 
-ENV:
-    - JWT_SECRET="random010232315443253random3j45jb395g4jdfg504gmdfkg53"
-
 services: mongodb
 
 before_script:
