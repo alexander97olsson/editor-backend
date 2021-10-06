@@ -2,15 +2,19 @@
 const database = require("../db/database.js");
 
 const data = {
-    getAllData: async function run(res, req) {
-        let temp = req.body;
-
-        console.log(temp);
+    getAllData: async function run(res=undefined, req=undefined) {
+        if (req === undefined) {
+            console.log("req is undefined");
+        }
         let db;
 
         try {
             db = await database.getDb();
             const allData = await db.collection.find().toArray();
+
+            if (res === undefined) {
+                return allData;
+            }
 
             return res.status(201).json({ data: { msg: allData } });
         } catch (e) {

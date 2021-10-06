@@ -2,15 +2,20 @@ const express = require("express");
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const morgan = require('morgan');
-
 const index = require('./routes/index');
 const data = require('./routes/data');
 const auth = require("./routes/auth");
 const app = express();
-
 const port = process.env.PORT || 1337;
-
 const httpServer = require("http").createServer(app);
+
+//graphq schema
+const Roots = require("./graphql/root.js");
+const visual = true;
+const { graphqlHTTP } = require('express-graphql');
+const {
+    GraphQLSchema
+} = require("graphql");
 
 const io = require("socket.io")(httpServer, {
     cors: {
@@ -59,6 +64,16 @@ app.use((req, res, next) => {
 });
 
 //routes
+const schema = new GraphQLSchema({
+    query: Roots.RootQueryType,
+    mutation: Roots.RootMutationType
+});
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    graphiql: visual, // Visual är satt till true under utveckling
+}));
+
 app.use('/', index);
 app.use('/data', data);
 app.use("/auth", auth);

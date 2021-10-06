@@ -14,6 +14,66 @@ try {
 const jwtSecret = process.env.JWT_SECRET || config.secret;
 
 const data = {
+    registerGraphQL: async function(argEmail, argPassword, res=undefined) {
+        const saltRounds = 5;
+        const email = argEmail;
+        const password = argPassword;
+
+        if (!email || !password) {
+            return res.status(401).json({
+                errors: {
+                    status: 401,
+                    source: "/register",
+                    title: "Email or password missing",
+                    detail: "Email or password missing in request"
+                }
+            });
+        }
+
+        bcrypt.hash(password, saltRounds, async function(err, hash) {
+            if (err) {
+                return res.status(500).json({
+                    errors: {
+                        status: 500,
+                        source: "/register",
+                        title: "bcrypt error",
+                        detail: "bcrypt error"
+                    }
+                });
+            }
+
+            let db;
+
+            try {
+                db = await database.getDb();
+
+                let users = {
+                    email: email,
+                    password: hash,
+                };
+
+                await db.collectionUsers.insertOne(users);
+
+                return res.status(201).json({
+                    data: {
+                        message: "User successfully registered."
+                    }
+                });
+            } catch (e) {
+                return res.status(500).json({
+                    errors: {
+                        status: 500,
+                        source: "/register",
+                        title: "Database error",
+                        detail: err.message
+                    }
+                });
+            } finally {
+                await db.client.close();
+            }
+        });
+    },
+
     register: async function(res, req) {
         const saltRounds = 5;
         const email = req.body.email;
@@ -195,15 +255,19 @@ const data = {
         }
     },
 
-    allUsers: async function(res, req) {
-        let temp = req.body;
-
-        console.log(temp);
+    allUsers: async function(res=undefined, req=undefined) {
+        if (req === undefined) {
+            console.log("req is undefined");
+        }
         let db;
 
         try {
             db = await database.getDb();
             const allData = await db.collectionUsers.find().toArray();
+
+            if (res === undefined) {
+                return allData;
+            }
 
             return res.status(201).json({ data: { users: allData } });
         } catch (e) {
