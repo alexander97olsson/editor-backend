@@ -2,8 +2,16 @@
 const database = require("../db/database.js");
 const ObjectId = require('mongodb').ObjectId;
 const mailgun = require("mailgun-js");
-const apiKeyer = "8ddd9fa0459961113ef661dffe813fb9-2ac825a1-a60468d4";
-const DOMAIN = 'sandbox3a9ca333dbc74df399e08355234c8387.mailgun.org';
+let config;
+
+try {
+    config = require("../config.json");
+} catch (error) {
+    console.error(error);
+}
+
+const apiKeyer = config.mailgunAPIKey;
+const DOMAIN = config.mailgunDomain;
 
 const data = {
     updateData: async function update(res, req) {
