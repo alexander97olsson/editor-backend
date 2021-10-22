@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const index = require('./routes/index');
 const data = require('./routes/data');
 const auth = require("./routes/auth");
+const save = require("./routes/save");
 const app = express();
 const port = process.env.PORT || 1337;
 const httpServer = require("http").createServer(app);
@@ -77,6 +78,10 @@ app.use('/graphql', graphqlHTTP({
 app.use('/', index);
 app.use('/data', data);
 app.use("/auth", auth);
+app.use("/create-pdf", save);
+app.get('/download-pdf', function(req, res) {
+    res.sendFile(`${__dirname}/result.pdf`);
+});
 
 // Add routes for 404 and error handling
 // Catch 404 and forward to error handler

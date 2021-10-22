@@ -1,6 +1,9 @@
 "use strict";
 const database = require("../db/database.js");
 const ObjectId = require('mongodb').ObjectId;
+const mailgun = require("mailgun-js");
+const apiKeyer = "8ddd9fa0459961113ef661dffe813fb9-2ac825a1-a60468d4";
+const DOMAIN = 'sandbox3a9ca333dbc74df399e08355234c8387.mailgun.org';
 
 const data = {
     updateData: async function update(res, req) {
@@ -49,6 +52,24 @@ const data = {
             const result = await db.collection.updateOne(filter, updateDoc);
 
             if (result) {
+                const mg = mailgun({apiKey: apiKeyer, domain: DOMAIN});
+                const allInfo = {
+                    from: 'Alexander <alexander93olsson@hotmail.com>',
+                    to: req.body.allowed_users,
+                    subject: 'Hejsan och välkommen!',
+                    text: `Du har blivit inbjuden till att jobba i ett dokument.\n` +
+                    `Följ länken för att registrera dig: ` +
+                    `https://www.student.bth.se/~alos17/alex-editor.\n` +
+                    `Om du redan är registrerad är det bara att logga in och skriva på!.\n` +
+                    `Vi ses i dokumentet, kul om du vill vara med!`
+                };
+
+                mg.messages().send(allInfo, function (error, body) {
+                    if (error) {
+                        console.log(error);
+                    }
+                    console.log(body);
+                });
                 return res.status(204).json();
             }
         } catch (e) {

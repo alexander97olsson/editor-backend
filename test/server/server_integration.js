@@ -8,9 +8,9 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../../app.js');
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhAaG90bWFpb` +
-`C5zZSIsImlhdCI6MTYzMzUwMzMzOSwiZXhwIjoxNjMzNTg5NzM5fQ.` +
-`doAysDUEv0bzw3shuhnOfHzj4v8KiLrq32cKZnBDiZw`;
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsZXhAaG90` +
+`bWFpbC5zZSIsImlhdCI6MTYzNDg5ODE4NSwiZXhwIjoxNjM0OTg0NTg1fQ.` +
+`RTHNcpWyfmCXwE3ngNHLB8z5016mBPcoMSFEa50iIaE`;
 //const database = require("../../db/database.js");
 //const collectionName = "crowd";
 
