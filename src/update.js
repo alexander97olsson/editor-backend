@@ -10,8 +10,8 @@ try {
     console.error(error);
 }
 
-const apiKeyer = config.mailgunAPIKey;
-const DOMAIN = config.mailgunDomain;
+const apiKeyer = "test" || config.mailgunAPIKey;
+const DOMAIN = "testing" || config.mailgunDomain;
 
 const data = {
     updateData: async function update(res, req) {
